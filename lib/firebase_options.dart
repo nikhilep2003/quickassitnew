@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCgKZiksW-paX9tuMT7iL-P23LY63ahLkk',
-    appId: '1:528221720193:android:b3b9df1e8dbcdd95584780',
+    appId: '1:528221720193:android:c1ea12dbdbdda1dd584780',
     messagingSenderId: '528221720193',
     projectId: 'quickassist-fd869',
     storageBucket: 'quickassist-fd869.appspot.com',
@@ -65,10 +65,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDiEOgra3HU0MvxfXGn9qG-lx2EJed5n1o',
-    appId: '1:528221720193:ios:76b9f5f0369cf71b584780',
+    appId: '1:528221720193:ios:7a1e572e9a7f454c584780',
     messagingSenderId: '528221720193',
     projectId: 'quickassist-fd869',
     storageBucket: 'quickassist-fd869.appspot.com',
-    iosBundleId: 'com.example.quickassist',
+    iosBundleId: 'com.example.quickassitnew',
   );
 }
