@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:quickassitnew/constans/text.dart';
 import 'package:quickassitnew/services/location_provider.dart';
+import 'package:quickassitnew/user/servicetype_list_page.dart';
 import 'package:quickassitnew/widgets/apptext.dart';
 import 'package:quickassitnew/widgets/customcontainer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -229,7 +230,15 @@ class _HomepageState extends State<Homepage> {
                                 decoration: BoxDecoration(
                                     color: AppColors.contColor2,
                                     borderRadius: BorderRadius.circular(10)),
-                                ontap: () {},
+                                ontap: () {
+                                  final Map<String,dynamic>data={
+
+                                    "type":"${service['title']}",
+                                    'location':locationCity,
+                                  };
+
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewServicebyType(data: data,)));
+                                },
                                 height: 150,
                                 width: 120,
                                 child: Column(
@@ -271,7 +280,11 @@ class _HomepageState extends State<Homepage> {
                                 decoration: BoxDecoration(
                                     color: AppColors.contColor2,
                                     borderRadius: BorderRadius.circular(10)),
-                                ontap: () {},
+                                ontap: () {
+
+
+
+                                },
                                 height: 150,
                                 width: 120,
                                 child: Column(
