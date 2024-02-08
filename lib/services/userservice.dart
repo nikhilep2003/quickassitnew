@@ -22,6 +22,17 @@ class UserService {
     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: user.email.toString(), password: user.password.toString());
 
+
+    await FirebaseFirestore.instance.collection('login').doc(userCredential.user!.uid).set(
+        {
+
+          'usertype':"user",
+          'uid': userCredential.user!.uid,
+          'email': userCredential.user!.email,
+          'password': user.password,
+          'status':1
+        });
+
     await _userCollection.doc(userCredential.user!.uid).set({
       'uid': userCredential.user!.uid,
       'email': userCredential.user!.email,
@@ -46,7 +57,7 @@ class UserService {
       'phone': user.phone,
       'location': user.location,
       'imgurl': user.imgurl,
-      'credits':user.credits,
+
 
       'dob':user.dob,
 

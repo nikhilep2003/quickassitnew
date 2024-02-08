@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:quickassitnew/constans/colors.dart';
 import 'package:quickassitnew/user/edit_profile.dart';
+import 'package:quickassitnew/user/mybookings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -215,7 +216,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   InkWell(
                     onTap: (){
 
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>YourProperty()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MyBookings()));
                     },
                     child: Text("Your Bookings",style: themedata.textTheme.displaySmall,),
                   ),

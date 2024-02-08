@@ -53,6 +53,10 @@ dependencies:
   geolocator:
   geocoding:
   image_picker:
+  uuid:
+  qr_flutter:
+  firebase_messaging:
+  onesignal_flutter: ^5.1.0
 
 dev_dependencies:
   flutter_test:

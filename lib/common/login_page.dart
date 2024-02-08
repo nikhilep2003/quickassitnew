@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:quickassitnew/admin/admin_home_page.dart';
 import 'package:quickassitnew/common/forgot_password.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/shops/shop_home_page.dart';
+import 'package:quickassitnew/shops/shop_registration.dart';
 import 'package:quickassitnew/user/bottomnavigation_page.dart';
 import 'package:quickassitnew/user/userregistration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,17 +31,24 @@ class _LoginPageState extends State<LoginPage> {
 
 
   bool visible = true;
+
   @override
   Widget build(BuildContext context) {
-    final themedata=Theme.of(context);
+    final themedata = Theme.of(context);
     return Scaffold(backgroundColor: AppColors.scaffoldColor,
       appBar: AppBar(backgroundColor: AppColors.scaffoldColor,),
       extendBodyBehindAppBar: true,
       body: Container(
         padding: EdgeInsets.all(20),
 
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: Form(
           key: _loginKey,
           child: CustomScrollView(
@@ -58,7 +67,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Text(
                           "Continue with Email",
-                          style: Theme.of(context).textTheme.displayLarge,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .displayLarge,
                         ),
                         SizedBox(
                           height: 20,
@@ -75,9 +87,11 @@ class _LoginPageState extends State<LoginPage> {
                             controller: emailText,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical:16),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
                               filled: true,
-                              hintStyle: TextStyle(color: Colors.black26,fontSize: 14),
+                              hintStyle: TextStyle(
+                                  color: Colors.black26, fontSize: 14),
                               fillColor: Colors.white,
                               hintText: 'Enter Email',
                               enabledBorder: OutlineInputBorder(
@@ -116,10 +130,12 @@ class _LoginPageState extends State<LoginPage> {
                             controller: passwordtext,
                             obscureText: visible,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical:16),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
                               filled: true,
                               fillColor: Colors.white,
-                              hintStyle: TextStyle(color: Colors.black26,fontSize: 14),
+                              hintStyle: TextStyle(
+                                  color: Colors.black26, fontSize: 14),
                               hintText: 'password',
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(17),
@@ -164,11 +180,14 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             InkWell(
-                                onTap:(){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPasswordScreen()));
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) =>
+                                          ForgotPasswordScreen()));
                                 },
 
-                                child: Text("Forgot Password",style: themedata.textTheme.displaySmall,))
+                                child: Text("Forgot Password",
+                                  style: themedata.textTheme.displaySmall,))
                           ],
                         ),
 
@@ -176,23 +195,22 @@ class _LoginPageState extends State<LoginPage> {
 
                         Center(
                           child: Container(
-                       width: MediaQuery.of(context).size.width,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
                             height: 52,
                             child: ElevatedButton(
 
                               onPressed: () async {
                                 if (_loginKey.currentState!.validate()) {
-
-
                                   _login();
-
-
-
                                 }
                               },
                               child: Text(
-                                "Continue with Email",
-                                style: TextStyle(color: Colors.white,fontSize: 18)
+                                  "Continue with Email",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18)
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.btnPrimaryColor,
@@ -208,14 +226,37 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Dont have an account?',style: themedata.textTheme.displaySmall,),
+                            Text('Dont have an account?',
+                              style: themedata.textTheme.displaySmall,),
                             SizedBox(width: 10,),
                             InkWell(
                                 onTap: () {
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>UserRegistrationScreen()));
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) =>
+                                          UserRegistrationScreen()));
                                 },
                                 child: Text(
                                   'Create new',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                )),
+                          ],
+                        ),
+
+                        SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) =>
+                                         ShopRegistrationScreen()));
+                                },
+                                child: Text(
+                                  'Click to Regiseter Your Business',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -236,13 +277,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _login() async{
-    if(emailText.text=="admin@gmail.com" && passwordtext.text=="12345678"){
-
-      SharedPreferences _pref=await SharedPreferences.getInstance();
+  _login() async {
+    if (emailText.text == "admin@gmail.com" &&
+        passwordtext.text == "12345678") {
+      SharedPreferences _pref = await SharedPreferences.getInstance();
       _pref.setString('uid', "adminid");
-      _pref.setString('email',emailText.text);
-      _pref.setString('name',"Admin");
+      _pref.setString('email', emailText.text);
+      _pref.setString('name', "Admin");
       _pref.setString('phone', "9846543117");
       _pref.setString('token', "admintoken");
       _pref.setString('type', "admin");
@@ -251,56 +292,98 @@ class _LoginPageState extends State<LoginPage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                 AdminHomePage(
+                  AdminHomePage(
 
                   )),
               (route) => false);
-
-    }else{
-      UserCredential userCredential=await FirebaseAuth.instance
+    } else {
+      UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
           email: emailText.text,
           password: passwordtext.text);
+      print(userCredential.user!.uid);
 
 
-      if(userCredential!=null){
+      if (userCredential != null) {
+        DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection(
+            'login').doc(userCredential.user!.uid).get();
+        print(snapshot['usertype']);
 
+        if (snapshot['usertype'] == "user") {
+          var snap = await FirebaseFirestore
+              .instance
+              .collection('users')
+              .doc(userCredential.user!.uid)
+              .get();
 
-        var snap = await FirebaseFirestore
-            .instance
-            .collection('users')
-            .doc(userCredential.user!.uid)
-            .get();
-
-FirebaseFirestore.instance.collection('bookmarks').doc(userCredential.user!.uid).set({
-'userId':userCredential.user!.uid,'shopIds': []
-        });
-        if (snap != null) {
-          SharedPreferences _pref=await SharedPreferences.getInstance();
-          _pref.setString('uid', snap['uid']);
-          _pref.setString('email', snap['email']);
-          _pref.setString('name', snap['name']);
-          _pref.setString('phone', snap['phone']);
-          _pref.setString('type', "user");
-          _pref.setString('location', "location");
-          _pref.setString('token', userCredential.user!.getIdToken().toString());
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      BottomNavigationPage(
-                        data: snap,
-                      )),
-                  (route) => false);
-        } else {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(
-              content:
-              Text("Login Failed")));
+          FirebaseFirestore.instance.collection('bookmarks').doc(
+              userCredential.user!.uid).set({
+            'userId': userCredential.user!.uid, 'shopIds': []
+          });
+          if (snap != null) {
+            SharedPreferences _pref = await SharedPreferences.getInstance();
+            _pref.setString('uid', snap['uid']);
+            _pref.setString('email', snap['email']);
+            _pref.setString('name', snap['name']);
+            _pref.setString('phone', snap['phone']);
+            _pref.setString('type', "user");
+            _pref.setString('location', "location");
+            _pref.setString('imgurl', "assets/img/profile.png");
+            _pref.setString(
+                'token', userCredential.user!.getIdToken().toString());
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        BottomNavigationPage(
+                          data: snap,
+                        )),
+                    (route) => false);
+          }
         }
+        else if (snapshot['usertype'] == "shop") {
+          print("am here jobin");
+          var snap = await FirebaseFirestore
+              .instance
+              .collection('shops')
+              .doc(userCredential.user!.uid)
+              .get();
 
+
+          if (snap != null) {
+            SharedPreferences _pref = await SharedPreferences.getInstance();
+            _pref.setString('uid', userCredential.user!.uid);
+            _pref.setString('email', snap['email']);
+            _pref.setString('name', snap['shopname']);
+            _pref.setString('phone', snap['phone']);
+            _pref.setString('type', "user");
+            _pref.setString('img', "assets/img/profile.png");
+            _pref.setString('address', snap['address']);
+            _pref.setString('account', snap['accountinfo']);
+            _pref.setString('license', snap['licenceno']);
+            _pref.setString('egst', snap['gst']);
+
+            _pref.setString('type', "shop");
+            _pref.setString('location', "location");
+            _pref.setString(
+                'token', userCredential.user!.getIdToken().toString());
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ShopHomePage(
+
+                        )),
+                    (route) => false);
+          }
+        }
+      }
+      else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(
+            content:
+            Text("Login Failed")));
       }
     }
-
   }
 }

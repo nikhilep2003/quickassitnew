@@ -10,7 +10,7 @@ class UserModel {
   String? imgurl;
   String? location;
   var dob;
-  var credits;
+
 
 
   int? status;
@@ -18,7 +18,7 @@ class UserModel {
 
   UserModel(
       {this.createdAt,
-        this.credits,
+
 
         this.dob,
 
@@ -42,7 +42,7 @@ class UserModel {
       phone: json['phone'],
       location: json['location'],
       imgurl: json['imgurl'],
-      credits: json['credits'],
+
 
       dob: json['dob'],
       createdAt: json['createdAt'],
@@ -58,7 +58,7 @@ class UserModel {
       'email': email,
       'location': location,
       'dob': dob.toIso8601String(),
-      'credits': credits,
+
 
       'imgurl': imgurl,
       'createdAt': createdAt!.toIso8601String(),

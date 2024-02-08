@@ -1,10 +1,12 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:quickassitnew/admin/admin_home_page.dart';
 import 'package:quickassitnew/common/login_page.dart';
 import 'package:quickassitnew/common/login_view.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/shops/shop_home_page.dart';
 import 'package:quickassitnew/user/bottomnavigation_page.dart';
 import 'package:quickassitnew/widgets/errorpage.dart';
 
@@ -69,6 +71,12 @@ class _SplashpageState extends State<Splashpage> {
             MaterialPageRoute(builder: (context) => BottomNavigationPage(data: data,)),
                 (route) => false);
       }
+      else if(_type=="shop" ){
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => ShopHomePage()),
+                (route) => false);
+      }
 
       else{
         Navigator.pushAndRemoveUntil(
@@ -81,6 +89,8 @@ class _SplashpageState extends State<Splashpage> {
   }
   @override
   void initState() {
+
+
     getData();
     // Future.delayed(
     //   Duration(seconds: 3),

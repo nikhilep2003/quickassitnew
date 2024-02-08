@@ -52,7 +52,7 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
         email: _usernameController.text.trim(),
         password: _passwordController.text.trim(),
         location: jobPlace,
-        credits: 0.0,
+
         imgurl:"null"
 
     );

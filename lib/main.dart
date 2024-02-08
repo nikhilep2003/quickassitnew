@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:quickassitnew/common/splash_page.dart';
 import 'package:quickassitnew/constans/colors.dart';
@@ -11,6 +12,12 @@ void main()async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize('b644b0de-2792-4da5-9df7-a7f71aca8d92');
+  OneSignal.Notifications.requestPermission(true).then((value) {
+    print('signal value: $value');
+  }
   );
   runApp(const MyApp());
 }

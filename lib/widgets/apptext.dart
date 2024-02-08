@@ -8,7 +8,7 @@ class AppText extends StatelessWidget {
   Color? color;
   FontWeight? fw;
   TextAlign? align;
-  AppText({Key? key, required this.data, this.size, this.color, this.fw,this.align=TextAlign.left})
+  AppText({Key? key, required this.data, this.size=18, this.color, this.fw,this.align=TextAlign.left})
       : super(key: key);
 
   @override

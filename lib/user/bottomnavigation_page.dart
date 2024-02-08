@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:quickassitnew/constans/colors.dart';
 import 'package:quickassitnew/user/homePage.dart';
+import 'package:quickassitnew/user/mybookings.dart';
 import 'package:quickassitnew/user/profilepage.dart';
 import 'package:quickassitnew/user/settings_page.dart';
 
@@ -34,7 +35,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
     _widgetOptions = [
 
       Homepage(),
-      Text("bookmarks"),
+      MyBookings(),
      Settingpage(),
       ProfilePage( data:widget.data)
     ];
