@@ -138,6 +138,10 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                       if(value!.isEmpty){
                         return "Phone is Mandatory";
                       }
+
+                      if (value!.length<10) {
+                        return 'Mobile Number is invalid';
+                      }
                     },controller: phoneController),
                 SizedBox(height: 16.0),
                 Text('Account Info'),

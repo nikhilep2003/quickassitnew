@@ -229,6 +229,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                         if (value!.isEmpty) {
                                           return 'Please enter a valid Phone No';
                                         }
+                                        if (value!.length<10) {
+                                          return 'Mobile Number is invalid';
+                                        }
                                         return null;
                                       },
                                       enabledBorder: const UnderlineInputBorder(

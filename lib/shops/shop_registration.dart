@@ -118,6 +118,10 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                   if (value!.isEmpty) {
                     return 'Please enter the phone number';
                   }
+
+                  if (value!.length<10) {
+                    return 'Mobile Number is invalid';
+                  }
                   return null;
                 },
               ),
