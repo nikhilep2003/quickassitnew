@@ -278,112 +278,113 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _login() async {
-    if (emailText.text == "admin@gmail.com" &&
-        passwordtext.text == "12345678") {
-      SharedPreferences _pref = await SharedPreferences.getInstance();
-      _pref.setString('uid', "adminid");
-      _pref.setString('email', emailText.text);
-      _pref.setString('name', "Admin");
-      _pref.setString('phone', "9846543117");
-      _pref.setString('token', "admintoken");
-      _pref.setString('type', "admin");
+    try {
+      if (emailText.text == "admin@gmail.com" && passwordtext.text == "12345678") {
+        SharedPreferences _pref = await SharedPreferences.getInstance();
+        _pref.setString('uid', "adminid");
+        _pref.setString('email', emailText.text);
+        _pref.setString('name', "Admin");
+        _pref.setString('phone', "9846543117");
+        _pref.setString('token', "admintoken");
+        _pref.setString('type', "admin");
 
-      Navigator.pushAndRemoveUntil(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  AdminHomePage(
-
-                  )),
-              (route) => false);
-    } else {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
+            builder: (context) =>
+                AdminHomePage(),
+          ),
+              (route) => false,
+        );
+      } else {
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailText.text,
-          password: passwordtext.text);
-      print(userCredential.user!.uid);
+          password: passwordtext.text,
+        );
+        print(userCredential.user!.uid);
 
+        if (userCredential != null) {
+          DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('login').doc(userCredential.user!.uid).get();
+          print(snapshot['usertype']);
 
-      if (userCredential != null) {
-        DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection(
-            'login').doc(userCredential.user!.uid).get();
-        print(snapshot['usertype']);
+          if (snapshot['usertype'] == "user") {
+            var snap = await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).get();
 
-        if (snapshot['usertype'] == "user") {
-          var snap = await FirebaseFirestore
-              .instance
-              .collection('users')
-              .doc(userCredential.user!.uid)
-              .get();
+            FirebaseFirestore.instance.collection('bookmarks').doc(userCredential.user!.uid).set({
+              'userId': userCredential.user!.uid, 'shopIds': []
+            });
 
-          FirebaseFirestore.instance.collection('bookmarks').doc(
-              userCredential.user!.uid).set({
-            'userId': userCredential.user!.uid, 'shopIds': []
-          });
-          if (snap != null) {
-            SharedPreferences _pref = await SharedPreferences.getInstance();
-            _pref.setString('uid', snap['uid']);
-            _pref.setString('email', snap['email']);
-            _pref.setString('name', snap['name']);
-            _pref.setString('phone', snap['phone']);
-            _pref.setString('type', "user");
-            _pref.setString('location', "location");
-            _pref.setString('imgurl', "assets/img/profile.png");
-            _pref.setString(
-                'token', userCredential.user!.getIdToken().toString());
-            Navigator.pushAndRemoveUntil(
+            if (snap != null) {
+              SharedPreferences _pref = await SharedPreferences.getInstance();
+              _pref.setString('uid', snap['uid']);
+              _pref.setString('email', snap['email']);
+              _pref.setString('name', snap['name']);
+              _pref.setString('phone', snap['phone']);
+              _pref.setString('type', "user");
+              _pref.setString('location', "location");
+              _pref.setString('imgurl', "assets/img/profile.png");
+              _pref.setString('token', userCredential.user!.getIdToken().toString());
+
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        BottomNavigationPage(
-                          data: snap,
-                        )),
-                    (route) => false);
-          }
-        }
-        else if (snapshot['usertype'] == "shop") {
-          print("am here jobin");
-          var snap = await FirebaseFirestore
-              .instance
-              .collection('shops')
-              .doc(userCredential.user!.uid)
-              .get();
+                  builder: (context) =>
+                      BottomNavigationPage(data: snap),
+                ),
+                    (route) => false,
+              );
+            }
+          } else if (snapshot['usertype'] == "shop") {
+            print("am here jobin");
+            var snap = await FirebaseFirestore.instance.collection('shops').doc(userCredential.user!.uid).get();
 
+            if (snap != null) {
+              SharedPreferences _pref = await SharedPreferences.getInstance();
+              _pref.setString('uid', userCredential.user!.uid);
+              _pref.setString('email', snap['email']);
+              _pref.setString('name', snap['shopname']);
+              _pref.setString('phone', snap['phone']);
+              _pref.setString('type', "user");
+              _pref.setString('img', "assets/img/profile.png");
+              _pref.setString('address', snap['address']);
+              _pref.setString('account', snap['accountinfo']);
+              _pref.setString('license', snap['licenceno']);
+              _pref.setString('egst', snap['gst']);
 
-          if (snap != null) {
-            SharedPreferences _pref = await SharedPreferences.getInstance();
-            _pref.setString('uid', userCredential.user!.uid);
-            _pref.setString('email', snap['email']);
-            _pref.setString('name', snap['shopname']);
-            _pref.setString('phone', snap['phone']);
-            _pref.setString('type', "user");
-            _pref.setString('img', "assets/img/profile.png");
-            _pref.setString('address', snap['address']);
-            _pref.setString('account', snap['accountinfo']);
-            _pref.setString('license', snap['licenceno']);
-            _pref.setString('egst', snap['gst']);
+              _pref.setString('type', "shop");
+              _pref.setString('location', "location");
+              _pref.setString('token', userCredential.user!.getIdToken().toString());
 
-            _pref.setString('type', "shop");
-            _pref.setString('location', "location");
-            _pref.setString(
-                'token', userCredential.user!.getIdToken().toString());
-            Navigator.pushAndRemoveUntil(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ShopHomePage(
-
-                        )),
-                    (route) => false);
+                  builder: (context) =>
+                      ShopHomePage(),
+                ),
+                    (route) => false,
+              );
+            }
           }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Login Failed"),
+            ),
+          );
         }
       }
-      else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(
-            content:
-            Text("Login Failed")));
-      }
+    } catch (e) {
+
+      var err=e.toString().split("]")[0];
+      print("Firebase Exception: $e");
+      print("Firebase Exception: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Firebase Exception: $err"),
+        ),
+      );
     }
+
   }
 }

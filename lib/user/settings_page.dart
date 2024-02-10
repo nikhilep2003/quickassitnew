@@ -171,7 +171,8 @@ class _SettingpageState extends State<Settingpage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TermsAndConditionsScreen()),
+                                    builder: (context) =>
+                                        TermsAndConditionsScreen()),
                               );
                             },
                             child: Text(
@@ -270,7 +271,7 @@ class _SettingpageState extends State<Settingpage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -302,11 +303,11 @@ class _SettingpageState extends State<Settingpage> {
                                   await SharedPreferences.getInstance();
                               FirebaseAuth.instance.signOut().then((value) {
                                 _pref.clear();
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                );
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                    (route) => false);
                               });
                             },
                             child: Text(
