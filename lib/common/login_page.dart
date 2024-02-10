@@ -13,6 +13,7 @@ import 'package:quickassitnew/shops/shop_home_page.dart';
 import 'package:quickassitnew/shops/shop_registration.dart';
 import 'package:quickassitnew/user/bottomnavigation_page.dart';
 import 'package:quickassitnew/user/userregistration.dart';
+import 'package:quickassitnew/widgets/validator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
@@ -80,9 +81,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           child: TextFormField(
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Field is Mandatory";
-                              }
+                             return Validate.emailValidator(value!);
                             },
                             controller: emailText,
                             keyboardType: TextInputType.emailAddress,
@@ -123,9 +122,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           child: TextFormField(
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Field is Mandatory";
-                              }
+                              return Validate.pwdvalidator(value!);
                             },
                             controller: passwordtext,
                             obscureText: visible,

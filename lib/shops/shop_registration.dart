@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quickassitnew/constans/colors.dart';
 import 'package:quickassitnew/models/shop_model.dart';
 import 'package:quickassitnew/services/shop_service.dart';
+import 'package:quickassitnew/widgets/appbutton.dart';
+import 'package:quickassitnew/widgets/apptext.dart';
+import 'package:quickassitnew/widgets/validator.dart';
 import 'package:uuid/uuid.dart';
 // Replace with the actual path
 
@@ -30,7 +34,7 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shop Registration'),
+        title: AppText(data:'Shop Registration',color: Colors.white,),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -74,7 +78,7 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value!.isEmpty || !value.contains('@')) {
-                    return 'Please enter a valid email address';
+                    return Validate.emailValidator(value!);
                   }
                   return null;
                 },
@@ -84,15 +88,15 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                 decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
                 validator: (value) {
-                  if (value!.isEmpty|| value.length < 6) {
-                    return 'Please enter a password with at least 6 characters';
+                  if (value!.isEmpty) {
+                    return Validate.emailValidator(value!);
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: serviceTypeController,
-                decoration: InputDecoration(labelText: 'Service Type'),
+                decoration: InputDecoration(labelText: 'Service Type. comma separated'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter the service type';
@@ -115,14 +119,8 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                 decoration: InputDecoration(labelText: 'Phone'),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter the phone number';
-                  }
+                return  Validate.phnvalidator(value!);
 
-                  if (value!.length<10) {
-                    return 'Mobile Number is invalid';
-                  }
-                  return null;
                 },
               ),
               TextFormField(
@@ -135,54 +133,39 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                   return null;
                 },
               ),
-              TextFormField(
-                controller: gstController,
-                decoration: InputDecoration(labelText: 'GST'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter the GST number';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: imgController,
-                decoration: InputDecoration(labelText: 'Image URL'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter the image URL';
-                  }
-                  return null;
-                },
-              ),
+
+
               SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    var id=Uuid().v1();
-                    Shop newShop = Shop(
-                      id: id,
-                      shopId: id,
-                      shopName: shopNameController.text,
-                      location: locationController.text,
-                      address: addressController.text,
-                      email: emailController.text,
-                      password: passwordController.text,
-                      serviceType: serviceTypeController.text.split(','),
-                      licenseNo: licenseNoController.text,
-                      phone: phoneController.text,
-                      accountInfo: accountInfoController.text,
-                      gst: gstController.text,
-                      img: imgController.text,
-                    );
+             AppButton(
+               height: 45,
+              color: AppColors.btnPrimaryColor,
+              onTap: () async {
+                if (_formKey.currentState!.validate()) {
+                  var id=Uuid().v1();
+                  Shop newShop = Shop(
+                    id: id,
+                    shopId: id,
+                    shopName: shopNameController.text,
+                    location: locationController.text,
+                    address: addressController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                    serviceType: serviceTypeController.text.split(','),
+                    licenseNo: licenseNoController.text,
+                    phone: phoneController.text,
+                    accountInfo: accountInfoController.text,
+                    gst: gstController.text,
+                    img: imgController.text,
+                  );
 
-                    await _shopService.addShop(newShop,);
+                  await _shopService.addShop(newShop,);
 
-                    // You can navigate to the shop list or any other screen after registration
-                    Navigator.pop(context);
-                  }
+                  // You can navigate to the shop list or any other screen after registration
+                  Navigator.pop(context);
+                }
+
                 },
-                child: Text('Register Shop'),
+                child: AppText(data:'Register Shop',color: Colors.white,),
               ),
             ],
           ),

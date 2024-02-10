@@ -170,12 +170,24 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                     CustomTextFormField(
 
                                       controller: _usernameController,
-                                      hintText: 'Enter your username',
+                                      hintText: 'Enter your Email',
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please enter a username';
+
+                                        if(value!.isEmpty){
+                                          return 'Required Field';
                                         }
-                                        return null;
+                                        var pattern =
+                                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                        RegExp regex = new RegExp(pattern);
+                                        if (!regex.hasMatch(value!))
+                                        {
+                                          return 'Email format is invalid';
+                                        }
+
+                                        else
+                                        {
+                                          return null;
+                                        }
                                       },
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide:
@@ -226,13 +238,10 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                       controller: _contactController,
                                       hintText: 'Enter Your Phone No',
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please enter a valid Phone No';
-                                        }
-                                        if (value!.length<10) {
-                                          return 'Mobile Number is invalid';
-                                        }
-                                        return null;
+                                        if(value!.length!=10 || num.parse(value)==null)
+                                          return'INVALID PHONE NUMBER';
+                                        else
+                                          return null;
                                       },
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide:
@@ -257,10 +266,11 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                       obscureText: true,
                                       hintText: 'Enter your Password',
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please enter a valid Password';
-                                        }
-                                        return null;
+                                        if(value!.length<8) {
+                                          return('PASSWORD SHOULD CONTAIN ATLEAST 8 CHARACTERS');
+                                        } else
+                                          return null;
+
                                       },
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide:
