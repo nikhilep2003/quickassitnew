@@ -88,10 +88,9 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                 decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
                 validator: (value) {
-                  if (value!.isEmpty) {
+
                     return Validate.emailValidator(value!);
-                  }
-                  return null;
+
                 },
               ),
               TextFormField(
