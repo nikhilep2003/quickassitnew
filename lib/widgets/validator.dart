@@ -23,7 +23,7 @@ class Validate
   }
   static String? pwdvalidator(String value)
   {
-    if(value.length<8) {
+    if(value.length<=8) {
       return('PASSWORD SHOULD CONTAIN ATLEAST 8 CHARACTERS');
     } else
       return null;
