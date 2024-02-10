@@ -154,7 +154,6 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                     licenseNo: licenseNoController.text,
                     phone: phoneController.text,
                     accountInfo: accountInfoController.text,
-                    gst: gstController.text,
                     img: imgController.text,
                   );
 
