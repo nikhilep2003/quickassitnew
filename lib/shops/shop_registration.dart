@@ -89,7 +89,7 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                 obscureText: true,
                 validator: (value) {
 
-                    return Validate.emailValidator(value!);
+                    return Validate.pwdvalidator(value!);
 
                 },
               ),
