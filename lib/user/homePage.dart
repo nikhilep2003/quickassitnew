@@ -302,7 +302,7 @@ class _HomepageState extends State<Homepage> {
                                   'location':locationCity,
                                   };
 
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewServicebyType(data: data,)));
+                                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewServicebyType(data: data,)));
 
                                 },
                                 height: 150,
@@ -349,8 +349,6 @@ class _HomepageState extends State<Homepage> {
                                 ontap: () {
 
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ShopList(selectionData: service['title'],city:locationCity ,uid: uid,)));
-
-
 
 
 
