@@ -57,6 +57,11 @@ dependencies:
   qr_flutter:
   firebase_messaging:
   onesignal_flutter: ^5.1.0
+  pdf: ^3.10.4
+  path_provider:
+  open_file: ^3.3.2
+  printing: ^5.11.0
+  razorpay_flutter:
 
 dev_dependencies:
   flutter_test:

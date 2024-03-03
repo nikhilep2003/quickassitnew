@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quickassitnew/models/shopService_model.dart';
 import 'package:quickassitnew/services/shopService_service.dart';
+import 'package:quickassitnew/widgets/apptext.dart';
 
 class ServiceListScreen extends StatefulWidget {
+  final String?uid;
+  ServiceListScreen({this.uid});
   @override
   _ServiceListScreenState createState() => _ServiceListScreenState();
 }
@@ -19,13 +22,18 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
       body: Container(
         padding: EdgeInsets.all(20),
         child: FutureBuilder(  
-          future: _serviceService.getServices(),
+          future: _serviceService.getServices(widget.uid.toString()),
           builder: (context, AsyncSnapshot<List<Service>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
-            } else {
+            }
+
+           else if(snapshot.data!.length==0){
+              return Center(child: AppText(data: "No Serrvices Added",color: Colors.black,));
+            }
+            else {
               List<Service>? services = snapshot.data;
         
               return ListView.builder(

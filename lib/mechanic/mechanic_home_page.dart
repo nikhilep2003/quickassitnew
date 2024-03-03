@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quickassitnew/common/login_page.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/mechanic/viewAll_works.dart';
 import 'package:quickassitnew/user/settings_page.dart';
 import 'package:quickassitnew/widgets/apptext.dart';
+import 'package:quickassitnew/widgets/dashboard_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MechanicHome extends StatefulWidget {
@@ -104,6 +106,17 @@ class _MechanicHomeState extends State<MechanicHome> {
         title: AppText(
           data: "Mechanic Home",
           color: Colors.white,
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+
+          children: [
+            DashboardItemWidget(onTap1: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>WorkAssigned()));
+            }, onTap2: (){}, titleOne: "Assigned Work", titleTwo: "Work Completed")
+          ],
         ),
       ),
     );

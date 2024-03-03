@@ -5,6 +5,7 @@ import 'package:quickassitnew/constans/colors.dart';
 import 'package:quickassitnew/shops/add_employee.dart';
 import 'package:quickassitnew/shops/add_ofers.dart';
 import 'package:quickassitnew/shops/add_service.dart';
+import 'package:quickassitnew/shops/asignedwork_all.dart';
 import 'package:quickassitnew/shops/shopBooking.dart';
 import 'package:quickassitnew/shops/view_all_employees.dart';
 import 'package:quickassitnew/shops/view_all_services.dart';
@@ -143,7 +144,7 @@ class _ShopHomePageState extends State<ShopHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ServiceListScreen(),
+                  builder: (context) => ServiceListScreen(uid: uid,),
                 ),
               );
             }, titleOne: "Add Service", titleTwo: "ViewAll Services"),
@@ -153,17 +154,17 @@ class _ShopHomePageState extends State<ShopHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ShopBookings(),
+                  builder: (context) => ShopBookings(uid:uid),
                 ),
               );
             }, onTap2: (){
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ServiceListScreen(),
+                  builder: (context) => AssignedWorkPage(),
                 ),
               );
-            }, titleOne: "All Bookings", titleTwo: "ViewAll Services"),
+            }, titleOne: "All Bookings", titleTwo: "Assigned Work"),
 
 
 

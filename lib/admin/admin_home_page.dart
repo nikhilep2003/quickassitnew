@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quickassitnew/admin/allpayment.dart';
 import 'package:quickassitnew/admin/notification/pages/allfeedbacks.dart';
 import 'package:quickassitnew/admin/notification/pages/sendnotification.dart';
 import 'package:quickassitnew/admin/notification/pages/viewallnotification.dart';
@@ -99,11 +100,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
         await SharedPreferences.getInstance();
     FirebaseAuth.instance.signOut().then((value) {
       _pref.clear();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LoginPage()),
-      );
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
+
     });
 
   },
@@ -211,7 +209,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
                 },
                 titleOne: "Add Notification",
-                titleTwo: "View All Notification")
+                titleTwo: "View All Notification"),
+
+            SizedBox(
+              height: 20,
+            ),
+            DashboardItemWidget(
+                onTap1: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentListPage()));
+                },
+                onTap2: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewAllNotifications()));
+
+                },
+                titleOne: "Payments",
+                titleTwo: "")
           ],
         ),
       ),

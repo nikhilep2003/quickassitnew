@@ -36,6 +36,9 @@ class BookingService {
       'time': selectedDateTime.toLocal().toString().split(' ')[1],
       'status': 'Pending', // You can set an initial status
       'createdAt': FieldValue.serverTimestamp(),
+      'empid':"",
+      'paymentstatus':0,
+
     };
 
     await _firestore.collection('bookings').doc(offer['bookingid']).set(newBookingData);
@@ -51,7 +54,30 @@ class BookingService {
         .toList();
   }
 
-  Future<void> confirmBooking(String bookingId) async {
+
+
+  Future<List<Map<String, dynamic>>>getEmployeesForShop(String shopId) async {
+    try {
+      QuerySnapshot employeeSnapshot = await _firestore
+          .collection('employees')
+          .where('shopId', isEqualTo: shopId)
+          .get();
+
+      List<Map<String, dynamic>> employees = employeeSnapshot.docs
+          .map((doc) => {
+        'id': doc.id,
+        'name': doc['name'] as String,
+      })
+          .toList();
+
+      return employees;
+    } catch (e) {
+      print('Error fetching employees for shop: $e');
+      return [];
+    }
+  }
+
+  Future<void> confirmBooking(String bookingId,String employeeId ) async {
     try {
       // Fetch booking details
       DocumentSnapshot bookingSnapshot = await _firestore.collection('bookings').doc(bookingId).get();
@@ -66,7 +92,7 @@ class BookingService {
         await _firestore
             .collection('bookings')
             .doc(bookingId)
-            .update({'status': 'Confirmed'});
+            .update({'status': 'Confirmed', 'empid': employeeId});
 
         // Generate QR code after the booking is confirmed
         String qrCodeData = await generateQRCodeForBooking(bookingId, bookingData);
@@ -187,4 +213,57 @@ class BookingService {
       throw e;
     }
   }
+
+
+
+  Future<List<Map<String, dynamic>>> getAssignedWork() async {
+    try {
+      QuerySnapshot bookingSnapshot = await _firestore
+          .collection('bookings')
+          .where('status', isEqualTo: 'Confirmed')
+          .where('empid', isNotEqualTo: null) // Filter bookings with assigned employee
+          .get();
+
+      return bookingSnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } catch (e) {
+      print('Error fetching assigned work: $e');
+      return [];
+    }
+  }
+  Future<Map<String, dynamic>?> getEmployeeDetails(String empId) async {
+    try {
+      DocumentSnapshot employeeSnapshot =
+      await _firestore.collection('employees').doc(empId).get();
+
+      if (employeeSnapshot.exists) {
+        return employeeSnapshot.data() as Map<String, dynamic>;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching employee details: $e');
+      return null;
+    }
+  }
+
+
+
+  Future<List<Map<String, dynamic>>> getAllBookingsForEmpolee(String userId) async {
+    try {
+      QuerySnapshot bookingsSnapshot = await _firestore
+          .collection('bookings')
+          .where('empid', isEqualTo: userId)
+          .get();
+
+      return bookingsSnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } catch (e) {
+      print('Error fetching bookings for user: $e');
+      return [];
+    }
+  }
+
 }

@@ -152,7 +152,7 @@ await _pref.setInt('exp', 0);
 
     return data;
   }
-  Future<UserModel> getUSerById(String eventId) async {
+  Future<UserModel?> getUSerById(String eventId) async {
     final DocumentSnapshot snapshot =
     await _userCollection.doc(eventId).get();
 

@@ -12,7 +12,7 @@ class Employee {
   String? adharNo;
   String? phone;
   String? accountInfo;
-  String? img;
+
 
   Employee({
     this.id,
@@ -26,7 +26,7 @@ class Employee {
     this.adharNo,
     this.phone,
     this.accountInfo,
-    this.img,
+
   });
 
   factory Employee.fromMap(Map<String, dynamic> data, String id) {
@@ -42,7 +42,7 @@ class Employee {
       adharNo: data['adharNo'],
       phone: data['phone'],
       accountInfo: data['accountInfo'],
-      img: data['img'],
+
     );
   }
 
@@ -58,7 +58,7 @@ class Employee {
       'adharNo': adharNo,
       'phone': phone,
       'accountInfo': accountInfo,
-      'img': img,
+
     };
   }
 }

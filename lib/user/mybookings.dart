@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:quickassitnew/checkout/checkout_page.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/services/userservice.dart';
+import 'package:quickassitnew/widgets/appbutton.dart';
 import 'package:quickassitnew/widgets/apptext.dart';
 import 'package:quickassitnew/services/booking_service.dart';
 import 'package:quickassitnew/widgets/mydivider.dart';
@@ -102,7 +105,7 @@ class _MyBookingsState extends State<MyBookings> {
                                       // Fetch QR code data for the confirmed booking
                                       Map<String,dynamic>? qrCodeData = await BookingService()
                                           .getQRCodeData(booking['bookingId']);
-
+                                      final userdata=await UserService().getUSerById(booking['userId']);
                                       if (qrCodeData != null) {
                                         // Display QR code when button is pressed
                                         showDialog(
@@ -112,7 +115,7 @@ class _MyBookingsState extends State<MyBookings> {
                                             return AlertDialog(
 
                                               content: Container(
-                                                height:550,
+                                                height:590,
                                                 width: 200,
                                                 child: Column(
                                                   children: [
@@ -137,6 +140,15 @@ class _MyBookingsState extends State<MyBookings> {
                                                     MyDivider(),
 
                                                     AppText(data: "Thank You for your Business",size: 12,color: Colors.teal,),
+SizedBox(height: 15,),
+                                                    booking['status']!="Completed"?    AppButton(
+                                                        height: 48,
+                                                        width: 200,
+                                                        color: AppColors.btnPrimaryColor,
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckoutPage(booking: booking,customerData: userdata,)));
+                                                        }, child: AppText(data: "Collect Payment",))
+                                                 :AppText(data: "Work Completed")
                                                   ],
                                                 ),
                                               ),

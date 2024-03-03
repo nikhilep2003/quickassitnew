@@ -154,6 +154,7 @@ class _ShopRegistrationScreenState extends State<ShopRegistrationScreen> {
                     phone: phoneController.text,
                     accountInfo: accountInfoController.text,
                     img: imgController.text,
+                    gst: ""
                   );
 
                   await _shopService.addShop(newShop,);

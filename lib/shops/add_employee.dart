@@ -161,15 +161,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     },
                     controller: accountInfoController),
                 SizedBox(height: 16.0),
-                Text('Image URL'),
-                TextFormField(
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return "Img is Mandatory";
-                      }
-                    },
-                    controller: imgController),
-                SizedBox(height: 16.0),
+
                 ElevatedButton(
                   onPressed: () {
                    if(_key.currentState!.validate()){
@@ -198,7 +190,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       adharNo: adharNoController.text,
       phone: phoneController.text,
       accountInfo: accountInfoController.text,
-      img: imgController.text,
+      //img: imgController.text,
     );
 
     _employeeService.addEmployee(newEmployee);

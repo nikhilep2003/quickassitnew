@@ -9,8 +9,8 @@ class ShopServiceService {
     await _servicesCollection.add(service.toMap());
   }
 
-  Future<List<Service>> getServices() async {
-    final QuerySnapshot snapshot = await _servicesCollection.get();
+  Future<List<Service>> getServices(String id) async {
+    final QuerySnapshot snapshot = await _servicesCollection.where('shopid',isEqualTo: id).get();
 
     return snapshot.docs.map((doc) => Service.fromSnapshot(doc)).toList();
   }
