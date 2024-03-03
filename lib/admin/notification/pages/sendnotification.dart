@@ -109,6 +109,7 @@ class _SendNotificationState extends State<SendNotification> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: AppColors.scaffoldColor,
       appBar: AppBar(
 
         title: AppText(data: "Send Notification",color: Colors.white,)
@@ -120,88 +121,81 @@ class _SendNotificationState extends State<SendNotification> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Card(
-                    color: AppColors.contColor6,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: 5.0,
-                    child: Form(
-                      key: _messageKey,
-                      child: Container(
-                        margin: const EdgeInsets.all(20),
-                        height: size.height * 0.40,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomTextFormField(
-                                controller: _titleController,
-                                hintText: 'Enter a title',
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a Title';
-                                  }
-                                  return null;
+                  child: Form(
+                    key: _messageKey,
+                    child: Container(
+                      margin: const EdgeInsets.all(20),
+                      height: size.height * 0.40,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomTextFormField(
+                              controller: _titleController,
+                              hintText: 'Enter a title',
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a Title';
+                                }
+                                return null;
+                              },
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _titleController.clear();
                                 },
-                                enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue),
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () {
-                                    _titleController.clear();
-                                  },
-                                ),
                               ),
-                              const SizedBox(
-                                height: 10,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomTextFormField(
+                              maxlines: 5,
+                              controller: _messageController,
+                              hintText: 'Enter Message',
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter Message';
+                                }
+                                return null;
+                              },
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
                               ),
-                              CustomTextFormField(
-                                maxlines: 5,
-                                controller: _messageController,
-                                hintText: 'Enter Message',
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter Message';
-                                  }
-                                  return null;
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _titleController.clear();
                                 },
-                                enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue),
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () {
-                                    _titleController.clear();
-                                  },
-                                ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Center(
-                                child: AppButton(
-                                  onTap: () {
-                                    if (_messageKey.currentState!.validate()) {
-                                      _sendMessage();
-                                    }
-                                  },
-                                 child: AppText(data:"Send"),
-                                  height: 45,
-                                  width: 250,
-                                  color: AppColors.btnPrimaryColor,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Center(
+                              child: AppButton(
+                                onTap: () {
+                                  if (_messageKey.currentState!.validate()) {
+                                    _sendMessage();
+                                  }
+                                },
+                               child: AppText(data:"Send"),
+                                height: 45,
+                                width: 250,
+                                color: AppColors.btnPrimaryColor,
 
-                                ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     ),

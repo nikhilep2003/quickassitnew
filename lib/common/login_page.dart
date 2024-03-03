@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:quickassitnew/admin/admin_home_page.dart';
 import 'package:quickassitnew/common/forgot_password.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/mechanic/mechanic_home_page.dart';
 import 'package:quickassitnew/shops/shop_home_page.dart';
 import 'package:quickassitnew/shops/shop_registration.dart';
 import 'package:quickassitnew/user/bottomnavigation_page.dart';
@@ -357,6 +358,37 @@ class _LoginPageState extends State<LoginPage> {
                 MaterialPageRoute(
                   builder: (context) =>
                       ShopHomePage(),
+                ),
+                    (route) => false,
+              );
+            }
+          }
+
+          else if (snapshot['usertype'] == "employee") {
+            print("am here jobin");
+            var snap = await FirebaseFirestore.instance.collection('employees').doc(userCredential.user!.uid).get();
+
+            if (snap != null) {
+              SharedPreferences _pref = await SharedPreferences.getInstance();
+              _pref.setString('uid', userCredential.user!.uid);
+              _pref.setString('email', snap['email']);
+              _pref.setString('name', snap['name']);
+              _pref.setString('phone', snap['phone']);
+              _pref.setString('type', "emloyee");
+              _pref.setString('img', "assets/img/profile.png");
+              _pref.setString('address', snap['address']);
+              _pref.setString('account', snap['accountInfo']);
+              _pref.setString('jobtype', snap['jobType']);
+              _pref.setString('shopid', snap['shopId']);
+
+             // _pref.setString('type', "shop");
+              _pref.setString('location', "location");
+              _pref.setString('token', userCredential.user!.getIdToken().toString());
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MechanicHome(),
                 ),
                     (route) => false,
               );

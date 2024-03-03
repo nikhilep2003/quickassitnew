@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quickassitnew/admin/notification/pages/send_feedback.dart';
 import 'package:quickassitnew/common/forgot_password.dart';
 import 'package:quickassitnew/common/login_page.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/user/all_notifications.dart';
 import 'package:quickassitnew/user/settings/aboutus.dart';
 import 'package:quickassitnew/user/settings/contact_page.dart';
 import 'package:quickassitnew/user/settings/privacy_policy.dart';
@@ -67,10 +69,18 @@ class _SettingpageState extends State<Settingpage> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 8.0, bottom: 8, top: 10),
-                          child: Text(
-                            "App Notifications",
-                            style: TextStyle(
-                              fontSize: 20,
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>AllNotifications()),
+                              );
+                            },
+                            child: Text(
+                              "App Notifications",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ),
@@ -99,48 +109,8 @@ class _SettingpageState extends State<Settingpage> {
                             ),
                           ),
                         ),
-                        Divider(
-                          indent: 8,
-                          endIndent: 8,
-                          thickness: 1.5,
-                          color: Colors.black26,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0, bottom: 8),
-                          child: Text(
-                            "Clear History",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          indent: 8,
-                          endIndent: 8,
-                          thickness: 1.5,
-                          color: Colors.black26,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // String currentUserId =
-                            //     FirebaseAuth.instance.currentUser?.uid ?? '';
-                            // BookmarkService()
-                            //     .clearBookmarks(currentUserId)
-                            //     .then((value) => ScaffoldMessenger.of(context)
-                            //         .showSnackBar(SnackBar(
-                            //             content: Text("Bookmarks Cleared"))));
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 8.0, bottom: 10),
-                            child: Text(
-                              "Clear Bookmarks",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
+
+
                       ],
                     ),
                   ),
@@ -214,31 +184,31 @@ class _SettingpageState extends State<Settingpage> {
                           thickness: 1.5,
                           color: Colors.black26,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AboutUsScreen()),
-                            );
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 8.0, bottom: 8),
-                            child: Text(
-                              "About Us",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          indent: 8,
-                          endIndent: 8,
-                          thickness: 1.5,
-                          color: Colors.black26,
-                        ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => AboutUsScreen()),
+                        //     );
+                        //   },
+                        //   child: Padding(
+                        //     padding:
+                        //         const EdgeInsets.only(left: 8.0, bottom: 8),
+                        //     child: Text(
+                        //       "About Us",
+                        //       style: TextStyle(
+                        //         fontSize: 20,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // Divider(
+                        //   indent: 8,
+                        //   endIndent: 8,
+                        //   thickness: 1.5,
+                        //   color: Colors.black26,
+                        // ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0, bottom: 10),
                           child: Text(
@@ -283,6 +253,32 @@ class _SettingpageState extends State<Settingpage> {
                                 left: 8.0, bottom: 8, top: 10),
                             child: Text(
                               "Contact Us",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Divider(
+                          indent: 8,
+                          endIndent: 8,
+                          thickness: 1.5,
+                          color: Colors.black26,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddFeedbackScreen()),
+                            );
+
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, bottom: 8, top: 10),
+                            child: Text(
+                              "Write to Us",
                               style: TextStyle(
                                 fontSize: 20,
                               ),

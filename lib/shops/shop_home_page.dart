@@ -93,11 +93,7 @@ class _ShopHomePageState extends State<ShopHomePage> {
                     await SharedPreferences.getInstance();
                 FirebaseAuth.instance.signOut().then((value) {
                   _pref.clear();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()),
-                  );
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                 });
               },
               title: AppText(data: "Logout",color: Colors.white,),

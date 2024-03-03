@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quickassitnew/admin/notification/services/notificationservice.dart';
 import 'package:quickassitnew/constans/colors.dart';
 import 'package:quickassitnew/widgets/apptext.dart';
 import 'package:quickassitnew/widgets/nodata_widget.dart';
@@ -36,7 +37,7 @@ class _AllNotificationsState extends State<AllNotifications> {
           AppText(data: "Latest Notifications",size: 18,color: Colors.white,),
           SizedBox(height: 16,),
           Expanded(child: FutureBuilder(
-            future: FirebaseFirestore.instance.collection('notifications').get(),
+            future: NotificationService().getAllNotification(),
             builder: (context,snapshot){
 
               if(snapshot.connectionState==ConnectionState.waiting){
@@ -45,17 +46,17 @@ class _AllNotificationsState extends State<AllNotifications> {
                 );
               }
 
-              if(snapshot.hasData && snapshot.data!.docs.length==0){
+              if(snapshot.hasData && snapshot.data!.length==0){
                 return NoDataWidget(errorMessage: "No Notification added");
               }
 
               if(snapshot.hasData){
 
                 return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
+                    itemCount: snapshot.data!.length,
                     itemBuilder: (context,index){
 
-                      final notification=snapshot.data!.docs[index];
+                      final notification=snapshot.data![index];
 
                   return Card(
                     elevation: 5.0,
@@ -63,8 +64,8 @@ class _AllNotificationsState extends State<AllNotifications> {
                     color: AppColors.scaffoldColor.withBlue(85),
                     child: ListTile(
                       leading: FaIcon(FontAwesomeIcons.circle,color: Colors.orange,),
-                      title: AppText(data: "${notification['title']}",color: Colors.white,),
-                      subtitle: AppText(data: "${notification['message']}",color: Colors.white,),
+                      title: AppText(data: "${notification.title}",color: Colors.white,),
+                      subtitle: AppText(data: "${notification.message}",color: Colors.white,),
                     ),
                   );
                 });

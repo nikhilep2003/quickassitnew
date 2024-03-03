@@ -75,7 +75,7 @@ class _ViewAllFeedbackAdminState extends State<ViewAllFeedbackAdmin> {
                           height: 150,
                           width: 220,
                           decoration: BoxDecoration(
-                              //color: AppColors().textColor2.withOpacity(0.6),
+                              color: AppColors.textColor2.withOpacity(0.6),
                               borderRadius: BorderRadius.circular(10)),
                           child: Stack(
                             children: [
@@ -89,11 +89,11 @@ class _ViewAllFeedbackAdminState extends State<ViewAllFeedbackAdmin> {
 
                                     return AlertDialog(
                                       title: AppText(data: "Feedback Reply",color: Colors.white,),
-                                      //backgroundColor: AppColors().primaryColor,
+                                      backgroundColor: AppColors.scaffoldColor,
                                       content: Container(
                                         height: 180,
                                         width: MediaQuery.of(context).size.width,
-                                        //color: AppColors().primaryColor,
+
                                         child: Form(
                                           key: _replyKey,
                                           child: Column(
@@ -122,6 +122,7 @@ class _ViewAllFeedbackAdminState extends State<ViewAllFeedbackAdmin> {
                                               ),
                                               Center(
                                                 child: AppButton(
+                                                  color: AppColors.primaryColor,
                                                   onTap: () {
                                                     if (_replyKey.currentState!.validate()) {
                                                       FeedbackModel _message=FeedbackModel(
@@ -136,7 +137,7 @@ class _ViewAllFeedbackAdminState extends State<ViewAllFeedbackAdmin> {
                                                     }
                                                   },
 
-                                                  child: Center(child: AppText(data: "Send Reply",color: Colors.black,)),
+                                                  child: Center(child: AppText(data: "Send Reply",color: Colors.white,)),
                                                   height: 45,
                                                   width: 250,
                                                 ),

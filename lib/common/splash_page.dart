@@ -6,6 +6,7 @@ import 'package:quickassitnew/admin/admin_home_page.dart';
 import 'package:quickassitnew/common/login_page.dart';
 import 'package:quickassitnew/common/login_view.dart';
 import 'package:quickassitnew/constans/colors.dart';
+import 'package:quickassitnew/mechanic/mechanic_home_page.dart';
 import 'package:quickassitnew/shops/shop_home_page.dart';
 import 'package:quickassitnew/user/bottomnavigation_page.dart';
 import 'package:quickassitnew/widgets/errorpage.dart';
@@ -75,6 +76,12 @@ class _SplashpageState extends State<Splashpage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => ShopHomePage()),
+                (route) => false);
+      }
+      else if(_type=="emloyee" ){
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => MechanicHome()),
                 (route) => false);
       }
 

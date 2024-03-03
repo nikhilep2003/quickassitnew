@@ -20,7 +20,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
             ),
             SizedBox(height: 8),
             _buildText(
-              "By using the House Hub app, you agree to comply with and be bound by these terms and conditions.",
+              "By using the QuickAssist app, you agree to comply with and be bound by these terms and conditions.",
             ),
             SizedBox(height: 16),
             Text(
@@ -29,7 +29,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
             ),
             SizedBox(height: 8),
             _buildText(
-              "You may use the House Hub app for lawful purposes only. You are prohibited from violating any applicable laws, rules, or regulations.",
+              "You may use the QuickAssist app for lawful purposes only. You are prohibited from violating any applicable laws, rules, or regulations.",
             ),
             _buildText(
               "You are responsible for maintaining the confidentiality of your account and password and for restricting access to your device.",

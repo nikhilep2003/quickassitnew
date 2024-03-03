@@ -3,6 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quickassitnew/admin/notification/pages/allfeedbacks.dart';
+import 'package:quickassitnew/admin/notification/pages/sendnotification.dart';
+import 'package:quickassitnew/admin/notification/pages/viewallnotification.dart';
 import 'package:quickassitnew/admin/viewall_emplyee.dart';
 import 'package:quickassitnew/admin/viewall_shops.dart';
 import 'package:quickassitnew/admin/viewall_users.dart';
@@ -187,9 +190,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 onTap1: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewAllEmployee()));
                 },
-                onTap2: () {},
+                onTap2: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewAllFeedbackAdmin()));
+
+                },
                 titleOne: "All Employees",
-                titleTwo: "All Services")
+                titleTwo: "All Feedbcaks"),
+
+
+
+            SizedBox(
+              height: 20,
+            ),
+            DashboardItemWidget(
+                onTap1: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SendNotification()));
+                },
+                onTap2: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewAllNotifications()));
+
+                },
+                titleOne: "Add Notification",
+                titleTwo: "View All Notification")
           ],
         ),
       ),
